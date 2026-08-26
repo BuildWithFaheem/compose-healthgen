@@ -1,0 +1,25 @@
+services:
+  pg:
+    image: postgres:16
+  cache:
+    image: redis:7
+  proxy:
+    image: nginx:alpine
+  db_mysql:
+    image: mysql:8
+  db_mariadb:
+    image: mariadb:11
+  db_mongo:
+    image: mongo:7
+  mq:
+    image: rabbitmq:3-management
+  mc:
+    image: memcached:1
+  search:
+    image: elasticsearch:8.12.0
+  api:
+    image: node:20-alpine
+  app_express:
+    image: express:latest
+  app_fastify:
+    image: fastify:latest
