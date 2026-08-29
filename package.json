@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src",
     "test": "tsx src/test.ts",
-    "test:e2e": "tsx src/e2e.ts"
+    "test:e2e": "tsx src/e2e.ts",
+    "test:flows": "tsx src/e2e-flows.ts"
   },
   "dependencies": {
     "commander": "^12.0.0",
