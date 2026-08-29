@@ -113,7 +113,7 @@ function buildRecipe(key: string, nodePort: number): HealthcheckConfig {
       test: [`CMD-SHELL`, `curl -f http://localhost:${nodePort}/health || exit 1`],
     };
   }
-  return { ...base };
+  return { ...base, test: [...base.test] };
 }
 
 // Matching order: exact → path-suffix → substring. First hit wins.
