@@ -1,6 +1,6 @@
 {
   "name": "compose-healthgen",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Zero-config CLI to add healthchecks to docker-compose.yml",
   "type": "module",
   "main": "dist/index.js",

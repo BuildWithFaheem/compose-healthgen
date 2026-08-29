@@ -2,7 +2,7 @@
 
 CLI that reads docker-compose.yml and emits production-ready healthcheck stanzas for every recognized service image.
 
-> Status: early. The API may change before 1.0.
+> Status: stable. 1.0 API.
 
 ## Install
 
