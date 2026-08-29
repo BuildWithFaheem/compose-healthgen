@@ -18,7 +18,8 @@ export function parse(content: string): ComposeFile {
     typeof doc !== 'object' ||
     !('services' in (doc as object)) ||
     (doc as { services: unknown }).services === null ||
-    typeof (doc as { services: unknown }).services !== 'object'
+    typeof (doc as { services: unknown }).services !== 'object' ||
+    Array.isArray((doc as { services: unknown }).services)
   ) {
     throw new Error("Invalid compose file: missing 'services' key");
   }

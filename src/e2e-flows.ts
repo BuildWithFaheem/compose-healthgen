@@ -173,6 +173,24 @@ withTempFile('services:\n', (input) => {
   ok("null 'services' value: no raw stack trace", !r.stderr.includes('TypeError'), r.stderr.slice(0, 300));
 });
 
+withTempFile('services: [a, b]', (input) => {
+  const r = cli(input);
+  ok("array-shaped 'services' value: exits non-zero instead of silently no-op'ing", r.status !== 0, `status=${r.status}\nstdout=${r.stdout}`);
+});
+
+{
+  const compose = `
+services:
+  db:
+    image: postgres:16
+`.trim();
+  withTempFile(compose, (input) => {
+    const r = cli(input, '--out', '/nonexistent-dir/out.yml');
+    ok('--out to an invalid path: exits non-zero instead of crashing', r.status !== 0, `status=${r.status}`);
+    ok('--out to an invalid path: no raw stack trace', !r.stderr.includes('at readFileSync') && !r.stderr.includes('at Object.<anonymous>'), r.stderr.slice(0, 300));
+  });
+}
+
 {
   const compose = `
 services:

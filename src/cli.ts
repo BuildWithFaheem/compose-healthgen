@@ -27,31 +27,24 @@ program
   .option('--skip-existing', 'Leave services that already have a healthcheck untouched')
   .option('--node-port <port>', 'Override default port (3000) used in node/express/fastify probes', parsePort, 3000)
   .action((file: string, opts: { diff: boolean; out?: string; skipExisting: boolean; nodePort: number }) => {
-    let content: string;
     try {
-      content = readFileSync(file, 'utf8');
-    } catch (err) {
-      console.error(`Error: could not read '${file}': ${(err as NodeJS.ErrnoException).message}`);
-      process.exit(1);
-    }
-
-    let result: string;
-    try {
-      result = patch(content, {
+      const content = readFileSync(file, 'utf8');
+      const result = patch(content, {
         diff: opts.diff,
         skipExisting: opts.skipExisting,
         nodePort: opts.nodePort,
         filename: file,
       });
-    } catch (err) {
-      console.error(`Error: ${(err as Error).message}`);
-      process.exit(1);
-    }
 
-    if (opts.out) {
-      writeFileSync(opts.out, result, 'utf8');
-    } else {
-      process.stdout.write(result);
+      if (opts.out) {
+        writeFileSync(opts.out, result, 'utf8');
+      } else {
+        process.stdout.write(result);
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error(`Error: ${message}`);
+      process.exit(1);
     }
   });
 
