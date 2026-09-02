@@ -17,7 +17,7 @@
     "test:flows": "tsx src/e2e-flows.ts"
   },
   "dependencies": {
-    "commander": "^12.0.0",
+    "commander": "^15.0.0",
     "diff": "^5.2.0",
     "js-yaml": "^4.1.0"
   },
